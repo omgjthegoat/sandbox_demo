@@ -1,0 +1,16 @@
+{
+  "name": "Maya Chen",
+  "contact": "maya@example.com",
+  "location": "Williamsburg",
+  "service_category": "shipping",
+  "request_summary": "I need help shipping a box.",
+  "urgency": "normal",
+  "routed_to": {
+    "team": "Shipping Desk",
+    "location": "Williamsburg",
+    "quote_required": false
+  },
+  "needs_human": false,
+  "timestamp": "2026-10-15T18:12:49.044664+00:00",
+  "transcript_reference": "lead_shipping_full_capture"
+}

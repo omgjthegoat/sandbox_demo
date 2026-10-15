@@ -1,0 +1,43 @@
+{
+  "business_name": "Sandbox Shipping",
+  "summary": "Sandbox Shipping is a fictional Brooklyn business with shipping, printing, and business services.",
+  "shipping": {
+    "description": "Domestic and international shipping via major carriers, plus packing help and freight quotes.",
+    "services": [
+      "Domestic shipping",
+      "International shipping",
+      "Packing help",
+      "Freight quotes",
+      "Carrier drop-off guidance"
+    ]
+  },
+  "printing": {
+    "description": "Copies, business cards, flyers, posters, large-format printing, and binding.",
+    "services": [
+      "Black-and-white copies",
+      "Color copies",
+      "Business cards",
+      "Flyers",
+      "Posters",
+      "Large-format printing",
+      "Binding"
+    ]
+  },
+  "business_services": {
+    "description": "Mailbox rental, notary, fax, scanning, shredding, and passport photos.",
+    "services": [
+      "Mailbox rental",
+      "Notary",
+      "Fax",
+      "Scanning",
+      "Shredding",
+      "Passport photos"
+    ]
+  },
+  "quote_only": [
+    "Freight quotes",
+    "Large-format jobs",
+    "Bulk print orders",
+    "Custom print jobs over 250 pieces"
+  ]
+}

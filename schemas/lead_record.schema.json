@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sandbox Shipping Lead Record",
+  "type": "object",
+  "required": [
+    "name",
+    "contact",
+    "location",
+    "service_category",
+    "request_summary",
+    "urgency",
+    "routed_to",
+    "needs_human",
+    "timestamp",
+    "transcript_reference"
+  ],
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contact": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "service_category": {
+      "type": "string"
+    },
+    "request_summary": {
+      "type": "string"
+    },
+    "urgency": {
+      "type": "string"
+    },
+    "routed_to": {
+      "type": "object",
+      "required": [
+        "team",
+        "location"
+      ],
+      "properties": {
+        "team": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "quote_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "needs_human": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "transcript_reference": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "returns": [
+    "No returns on postage, notary, fax, scanning, or custom work after approval.",
+    "Unopened retail supplies may be returned within 14 days with a receipt."
+  ],
+  "prohibited_items": [
+    "Hazardous materials",
+    "Explosives",
+    "Firearms",
+    "Live animals",
+    "Perishable food",
+    "Illegal items"
+  ],
+  "id_requirements": [
+    "Mailbox rental requires a government-issued photo ID.",
+    "Notary services require a government-issued photo ID.",
+    "Passport photo service does not require ID, but the customer should know the passport photo specifications they need."
+  ],
+  "turnaround_times": [
+    "Copies and fax: same day while the store is open.",
+    "Scanning and shredding: same day or next business day depending on volume.",
+    "Business cards: 1\u20132 business days.",
+    "Flyers and posters: 1\u20133 business days depending on quantity and finish.",
+    "Large-format and bulk print orders: quote-based schedule provided by staff.",
+    "Passport photos: about 15 minutes.",
+    "Mailbox rental applications: same day if ID checks out."
+  ]
+}

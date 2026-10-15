@@ -1,0 +1,94 @@
+{
+  "shipping": [
+    {
+      "item": "Local padded envelope drop-off",
+      "price": "$8.95"
+    },
+    {
+      "item": "Small domestic box",
+      "price": "$13.95"
+    },
+    {
+      "item": "Medium domestic box",
+      "price": "$19.95"
+    },
+    {
+      "item": "Packing service",
+      "price": "from $9.00"
+    },
+    {
+      "item": "Freight",
+      "price": "quote required"
+    },
+    {
+      "item": "International shipping",
+      "price": "carrier quote required"
+    }
+  ],
+  "printing": [
+    {
+      "item": "B&W copies",
+      "price": "$0.18/page"
+    },
+    {
+      "item": "Color copies",
+      "price": "$0.79/page"
+    },
+    {
+      "item": "Business cards (100)",
+      "price": "$24.95"
+    },
+    {
+      "item": "Flyers (100, 8.5x11, single-sided)",
+      "price": "$49.00"
+    },
+    {
+      "item": "Posters (18x24)",
+      "price": "$24.00"
+    },
+    {
+      "item": "Binding",
+      "price": "from $6.00"
+    },
+    {
+      "item": "Large-format printing",
+      "price": "quote required"
+    },
+    {
+      "item": "Bulk print orders",
+      "price": "quote required"
+    }
+  ],
+  "business_services": [
+    {
+      "item": "Mailbox rental",
+      "price": "from $19/month"
+    },
+    {
+      "item": "Notary",
+      "price": "$8/signature"
+    },
+    {
+      "item": "Fax",
+      "price": "$1.50/page"
+    },
+    {
+      "item": "Scanning",
+      "price": "$0.50/page"
+    },
+    {
+      "item": "Shredding",
+      "price": "$0.25/lb"
+    },
+    {
+      "item": "Passport photos",
+      "price": "$16.00"
+    }
+  ],
+  "quote_required": [
+    "Freight",
+    "Large-format printing",
+    "Bulk print orders",
+    "Custom print jobs over 250 pieces"
+  ]
+}

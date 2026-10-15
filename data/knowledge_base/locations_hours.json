@@ -1,0 +1,41 @@
+{
+  "business_name": "Sandbox Shipping",
+  "default_location": "Park Slope",
+  "locations": [
+    {
+      "name": "Park Slope",
+      "address": "212 5th Ave, Brooklyn, NY 11215",
+      "phone": "555-0101",
+      "hours": {
+        "mon_fri": "8:00 AM\u20137:00 PM",
+        "sat": "9:00 AM\u20135:00 PM",
+        "sun": "Closed"
+      }
+    },
+    {
+      "name": "Williamsburg",
+      "address": "88 Bedford Ave, Brooklyn, NY 11211",
+      "phone": "555-0102",
+      "hours": {
+        "mon_fri": "8:00 AM\u20137:00 PM",
+        "sat": "9:00 AM\u20135:00 PM",
+        "sun": "Closed"
+      }
+    },
+    {
+      "name": "DUMBO",
+      "address": "14 Water St, Brooklyn, NY 11201",
+      "phone": "555-0103",
+      "hours": {
+        "mon_fri": "8:00 AM\u20137:00 PM",
+        "sat": "9:00 AM\u20135:00 PM",
+        "sun": "11:00 AM\u20134:00 PM"
+      }
+    }
+  ],
+  "holiday_exceptions": [
+    "Closed on New Year's Day, Thanksgiving Day, and Christmas Day.",
+    "Reduced hours on Christmas Eve and New Year's Eve: 8:00 AM\u20131:00 PM at all locations.",
+    "If a holiday schedule is not listed in the knowledge base, escalate rather than guess."
+  ]
+}

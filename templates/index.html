@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sandbox Shipping AI Front Desk Demo</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --panel: rgba(255,255,255,.88);
+      --panel-solid: #ffffff;
+      --border: rgba(148,163,184,.28);
+      --text: #0f172a;
+      --muted: #475569;
+      --blue: #2563eb;
+      --navy: #0f172a;
+      --soft: #e2e8f0;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.10);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(14,165,233,.12), transparent 24%),
+        var(--bg);
+    }
+    .hero { max-width: 1220px; margin: 0 auto; padding: 28px 24px 0; }
+    .hero-card {
+      background: linear-gradient(135deg, rgba(15,23,42,.96), rgba(37,99,235,.92));
+      color: white; padding: 26px 28px; border-radius: 28px; box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .hero-card h1 { margin: 0 0 8px; font-size: 2rem; letter-spacing: -0.03em; }
+    .hero-card p { margin: 0; max-width: 72ch; color: rgba(255,255,255,.82); line-height: 1.55; }
+    .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .pill { padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.16); font-size: 12px; }
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 20px 24px 28px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; }
+    .card {
+      background: var(--panel); backdrop-filter: blur(10px); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+    }
+    .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .section-title h2 { margin: 0; font-size: 1.1rem; }
+    .section-title .small { margin: 0; }
+    .small { color: var(--muted); font-size: .95rem; line-height: 1.5; }
+    .grid { display: grid; gap: 12px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    textarea, input, button { width: 100%; font: inherit; border-radius: 14px; }
+    textarea, input {
+      border: 1px solid #cbd5e1; background: var(--panel-solid); padding: 12px 14px; color: var(--text);
+    }
+    textarea { min-height: 180px; resize: vertical; }
+    button {
+      border: 0; padding: 12px 14px; background: linear-gradient(180deg, #2563eb, #1d4ed8);
+      color: white; cursor: pointer; font-weight: 600; box-shadow: 0 8px 18px rgba(37,99,235,.22);
+    }
+    button.secondary { background: #0f172a; box-shadow: none; }
+    .chat-log {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px;
+      min-height: 260px; max-height: 560px; overflow-y: auto; display: grid; gap: 12px;
+    }
+    .bubble { padding: 12px 14px; border-radius: 16px; max-width: 92%; line-height: 1.45; white-space: pre-wrap; }
+    .bubble.user { background: #dbeafe; margin-left: auto; }
+    .bubble.assistant { background: white; border: 1px solid #e2e8f0; }
+    .meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; gap: 10px; }
+    .split { display: grid; grid-template-columns: .72fr .28fr; gap: 10px; align-items: start; }
+    .badge { display: inline-block; padding: 5px 10px; border-radius: 999px; background: #dcfce7; color: #166534; font-size: 12px; }
+    .status { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    pre {
+      white-space: pre-wrap; background: #0b1220; color: #e2e8f0; padding: 14px; border-radius: 16px; min-height: 140px; overflow: auto;
+    }
+    .toolbar { display: flex; gap: 8px; }
+    .toolbar button { width: auto; }
+    .section-box {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; margin-bottom: 12px;
+    }
+    .section-box h3 { margin: 0 0 6px; font-size: 1rem; }
+    .section-box p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .quick-grid, .scenario-grid { display: grid; gap: 8px; }
+    .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .scenario-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .quick-btn, .scenario-btn {
+      border: 1px solid #cbd5e1; background: white; color: var(--navy); box-shadow: none; text-align: left;
+    }
+    .quick-btn:hover, .scenario-btn:hover { border-color: #93c5fd; }
+    .history-header { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; }
+    .history-header h2 { margin:0; }
+    .history-wrap { display:grid; gap:10px; }
+    @media (max-width: 960px) {
+      .wrap { grid-template-columns: 1fr; }
+      .row, .split, .quick-grid, .scenario-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-card">
+      <h1>Sandbox Shipping AI Front Desk Demo</h1>
+      <p>Fictional Brooklyn business. Clean, grounded demo. The assistant answers from the knowledge base, captures leads, and shows a browser conversation history so the flow is easy to review.</p>
+      <div class="pill-row">
+        <span class="pill">Knowledge-grounded answers</span>
+        <span class="pill">Lead intake</span>
+        <span class="pill">Human escalation</span>
+        <span class="pill">Editable KB</span>
+        <span class="pill">Conversation history</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="history-header">
+        <div>
+          <h2>Conversation history</h2>
+          <p class="small">Timestamps are shown for every user and assistant message.</p>
+        </div>
+        <div class="toolbar">
+          <button class="secondary" onclick="clearHistory()">Clear history</button>
+        </div>
+      </div>
+      <div id="chat_log" class="chat-log" aria-live="polite"></div>
+
+      <div class="section-box" style="margin-top:14px">
+        <h3>Quick replies</h3>
+        <p>Tap a common prompt to seed the chat box.</p>
+        <div class="quick-grid" id="quick_replies"></div>
+      </div>
+
+      <div class="section-box">
+        <h3>Demo scenarios</h3>
+        <p>Run a full example conversation starter.</p>
+        <div class="scenario-grid" id="demo_scenarios"></div>
+      </div>
+
+      <div class="section-box" style="margin-top:14px">
+        <h3>Chat</h3>
+        <p>Use this like a front desk assistant. Ask about hours, services, pricing, or start a lead conversation.</p>
+      </div>
+
+      <div class="grid">
+        <div class="row">
+          <input id="session_id" placeholder="session id" value="web-demo">
+          <input id="contact" placeholder="optional contact info">
+        </div>
+        <textarea id="chat_input" placeholder="Try: What are your hours in DUMBO on Sunday?"></textarea>
+        <div class="row">
+          <button onclick="sendChat()">Send</button>
+          <button class="secondary" onclick="loadKB()">Refresh KB</button>
+        </div>
+      </div>
+
+      <div class="section-box" style="margin-top:14px">
+        <h3>Raw response</h3>
+        <p>Useful for debugging the assistant’s exact response payload.</p>
+        <pre id="response">Ready.</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <div>
+          <h2>Editable Knowledge Base</h2>
+          <p class="small">Edit the full JSON bundle directly, then save. This updates the running demo immediately.</p>
+        </div>
+      </div>
+      <div class="section-box">
+        <h3>Bundle editor</h3>
+        <p>One source of truth for services, pricing, locations, policies, and routing rules.</p>
+      </div>
+      <textarea id="kb_editor"></textarea>
+      <div class="row" style="margin-top:10px">
+        <button onclick="saveKB()">Save KB</button>
+        <button class="secondary" onclick="loadKB()">Reload KB</button>
+      </div>
+      <div class="status">
+        <span class="badge">Local demo</span>
+        <span class="badge">Fictional business</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+const chatLog = document.getElementById('chat_log');
+let historyCache = [];
+
+const QUICK_REPLIES = {{ quick_replies|tojson }};
+const DEMO_SCENARIOS = {{ demo_scenarios|tojson }};
+
+function fmtTime(ts) {
+  if (!ts) return '';
+  try {
+    return new Date(ts).toLocaleString();
+  } catch (e) {
+    return ts;
+  }
+}
+
+function appendBubble(role, text, meta='', ts='') {
+  const wrapper = document.createElement('div');
+  const label = document.createElement('div');
+  label.className = 'meta';
+  const left = document.createElement('span');
+  left.textContent = meta || (role === 'user' ? 'You' : 'Assistant');
+  const right = document.createElement('span');
+  right.textContent = fmtTime(ts);
+  label.appendChild(left);
+  label.appendChild(right);
+  const bubble = document.createElement('div');
+  bubble.className = `bubble ${role}`;
+  bubble.textContent = text;
+  wrapper.appendChild(label);
+  wrapper.appendChild(bubble);
+  chatLog.appendChild(wrapper);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+function renderQuickReplies() {
+  const el = document.getElementById('quick_replies');
+  el.innerHTML = '';
+  QUICK_REPLIES.forEach(label => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = label;
+    btn.onclick = () => {
+      const map = {
+        'Hours in DUMBO': 'What are your hours in DUMBO on Sunday?',
+        'Shipping quote': 'How much for shipping a fragile box?',
+        'Mailbox pricing': 'How much is mailbox rental?',
+        'Passport photos': 'How much are passport photos?'
+      };
+      document.getElementById('chat_input').value = map[label] || label;
+      document.getElementById('chat_input').focus();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderDemoScenarios() {
+  const el = document.getElementById('demo_scenarios');
+  el.innerHTML = '';
+  DEMO_SCENARIOS.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'scenario-btn';
+    btn.innerHTML = `<strong>${item.label}</strong><br><span class="small">${item.message}</span>`;
+    btn.onclick = () => {
+      document.getElementById('chat_input').value = item.message;
+      document.getElementById('chat_input').focus();
+    };
+    el.appendChild(btn);
+  });
+}
+
+async function refreshHistory() {
+  const session_id = document.getElementById('session_id').value || 'web-demo';
+  const r = await fetch(`/history/${encodeURIComponent(session_id)}`);
+  const data = await r.json();
+  historyCache = data.messages || [];
+  chatLog.innerHTML = '';
+  if (historyCache.length === 0) {
+    appendBubble('assistant', 'Conversation history will appear here after you send a message.', 'System');
+    return;
+  }
+  historyCache.forEach((m, i) => appendBubble(m.role === 'user' ? 'user' : 'assistant', m.content, m.role.toUpperCase() + ' ' + (i + 1), m.timestamp || ''));
+}
+
+async function sendChat(){
+  const session_id = document.getElementById('session_id').value || 'web-demo';
+  const message = document.getElementById('chat_input').value;
+  if (!message.trim()) return;
+  const r = await fetch('/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({session_id, message})});
+  const data = await r.json();
+  document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+  document.getElementById('chat_input').value = '';
+  await refreshHistory();
+}
+async function loadKB(){
+  const r = await fetch('/kb');
+  const data = await r.json();
+  document.getElementById('kb_editor').value = JSON.stringify(data, null, 2);
+}
+async function saveKB(){
+  const data = JSON.parse(document.getElementById('kb_editor').value);
+  const r = await fetch('/kb', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+  const out = await r.json();
+  document.getElementById('response').textContent = JSON.stringify(out, null, 2);
+  await loadKB();
+}
+async function clearHistory() {
+  document.getElementById('chat_log').innerHTML = '';
+  document.getElementById('response').textContent = 'Ready.';
+}
+renderQuickReplies();
+renderDemoScenarios();
+loadKB();
+refreshHistory();
+</script>
+</body>
+</html>

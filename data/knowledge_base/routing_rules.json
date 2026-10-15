@@ -1,0 +1,88 @@
+{
+  "default_location": "Park Slope",
+  "locations": [
+    "Park Slope",
+    "Williamsburg",
+    "DUMBO"
+  ],
+  "teams": {
+    "Shipping Desk": {
+      "keywords": [
+        "ship",
+        "shipping",
+        "freight",
+        "pack",
+        "packing",
+        "carrier",
+        "international",
+        "domestic",
+        "tracking"
+      ],
+      "quote_keywords": [
+        "freight",
+        "international shipping",
+        "quote"
+      ],
+      "default_location": "Park Slope"
+    },
+    "Print Studio": {
+      "keywords": [
+        "print",
+        "printing",
+        "copy",
+        "copies",
+        "flyer",
+        "flyers",
+        "poster",
+        "posters",
+        "business card",
+        "binding",
+        "large-format",
+        "bulk print"
+      ],
+      "quote_keywords": [
+        "large-format",
+        "bulk",
+        "custom",
+        "250 pieces"
+      ],
+      "default_location": "Park Slope"
+    },
+    "Business Services": {
+      "keywords": [
+        "mailbox",
+        "notary",
+        "fax",
+        "scan",
+        "scanning",
+        "shred",
+        "shredding",
+        "passport photo",
+        "passport photos"
+      ],
+      "quote_keywords": [],
+      "default_location": "Park Slope"
+    },
+    "Store Manager": {
+      "keywords": [
+        "complaint",
+        "manager",
+        "refund",
+        "discount",
+        "escalat",
+        "problem",
+        "issue"
+      ],
+      "quote_keywords": [],
+      "default_location": "Park Slope"
+    }
+  },
+  "escalation_triggers": [
+    "out of scope",
+    "not in the knowledge base",
+    "uncertain answer",
+    "complaint",
+    "policy dispute",
+    "refused contact info"
+  ]
+}
