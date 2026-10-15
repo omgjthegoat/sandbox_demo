@@ -54,6 +54,12 @@ python3 -m unittest discover -s tests -v
 - `leads/` — generated lead JSON files
 - `tests/` — scripted conversation and UI tests
 
+## Screenshots
+- `screenshot.png` — captured from the local web UI
+
+## Test results
+- `python3 -m unittest discover -s tests -v` → OK
+
 ## Notes
 - Pricing and hours are sample data for the demo.
 - Quote-based jobs are routed, not priced.
